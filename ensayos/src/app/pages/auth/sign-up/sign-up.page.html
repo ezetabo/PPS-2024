@@ -1,0 +1,56 @@
+<app-header title="Registrarse" [ver]="true"></app-header>
+
+<ion-content>
+
+  <div class="d-flex-center">
+    <form [formGroup]="myForm" class="auth-form" (ngSubmit)="submit()">
+      <app-logo></app-logo>
+
+      <app-custom-input icon="person-outline"
+      autocomplete="name"
+      [control]="myForm.controls.name"
+      type="text"
+      label="nombre"></app-custom-input>
+
+    <div class="validators"
+      *ngIf="myForm.controls.name.errors && myForm.controls.name.touched">
+      <div *ngIf="myForm.controls.name.errors?.['required']">El nombre es requerido</div>
+      <div *ngIf="myForm.controls.name.errors?.['minlength']">El nombre requiere minimo 3 caracteres</div>
+    </div>
+
+      <app-custom-input icon="mail-outline"
+        autocomplete="email"
+        [control]="myForm.controls.email"
+        type="email"
+        label="correo"></app-custom-input>
+
+      <div class="validators"
+        *ngIf="myForm.controls.email.errors && myForm.controls.email.touched">
+        <div *ngIf="myForm.controls.email.errors?.['required']">El correo es
+          requerido</div>
+        <div *ngIf="myForm.controls.email.errors?.['email']">Ingrese un correo
+          valido</div>
+      </div>
+
+      <app-custom-input icon="lock-closed-outline"
+        [control]="myForm.controls.password"
+        type="password"
+        label="contraseña"></app-custom-input>
+      <div class="validators"
+        *ngIf="myForm.controls.password.errors && myForm.controls.password.touched">
+        <div *ngIf="myForm.controls.password.errors?.['required']">La contraseña
+          es requerida</div>
+        <div *ngIf="myForm.controls.password.errors?.['minlength']">La
+          contraseña requiere como minimo 8 caracteres</div>
+      </div>
+
+      <ion-button class="submit" type="submit" expand="block" mode="ios"
+        [disabled]="myForm.invalid">
+        Registrarse
+      <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button>
+
+    </form>
+  </div>
+
+</ion-content>
